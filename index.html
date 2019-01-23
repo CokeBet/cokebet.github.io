@@ -17,14 +17,24 @@
         width: 300px;
         height: 300px;
       }
+      .btn-cont {
+        margin-top: 50px;
+        display: flex;
+      }
+      .btn {
+        height: 50px;
+        width: 100px;
+      }
     </style>
   </head>
   <body>
     <h1>COKEBET Verifier</h1>
     <div class="cont">
       <textarea id="json-input" >pased json string</textarea>
-      <button id="ver-btn">verify</button>
-      <button id="rnd-btn">get random number</button>
+      <div class="btn-cont">
+        <button id="ver-btn" class="btn">verify</button>
+        <button id="rnd-btn" class="btn">get random number</button>
+      </div>
     </div>
     <script>
     $(() => {
