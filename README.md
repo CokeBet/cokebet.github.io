@@ -1,2 +1,2 @@
-# noxbet.github.io
-noxbet pages
+# cokebet.github.io
+cokebet verifier pages
