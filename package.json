@@ -1,0 +1,16 @@
+{
+  "name": "cokebet.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:CokeBet/cokebet.github.io.git",
+  "author": "codebet <dev@coke.bet>",
+  "license": "MIT",
+  "private": false,
+  "script": {
+    "build": "browserify lib/core -o build/bundle.js"
+  },
+  "dependencies": {
+    "node-rsa": "^1.0.2",
+    "web3": "^1.0.0-beta.37"
+  }
+}
