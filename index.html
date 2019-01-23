@@ -4,27 +4,30 @@
     <meta charset="utf-8">
     <title>cokebet verifier</title>
     <script src="build/bundle.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
   </head>
   <body>
     <h1>COKEBET Verifier</h1>
-    <textarea id="json-input" />
-    <button>verify</button>
+    <textarea id="json-input" >pased json string</textarea>
+    <button id="ver-btn">verify</button>
+    <button id="rnd-btn">get random number</button>
     <script>
-    const info = {
-      channelId: '0x487f81804b61a11e6afa8994f195407a7c9254fab49ab1f44b1fd0c6d9b84de2', // bet
-      session: 1, // bet
-      betMoney: '10000', // bet
-      betNumber: 50, // bet
-      seed: '1548160984850', // bet
-      rndSig: '41bba4126db9cbfd5c834de47e019308128d89d3c7fef2130f3d4656b5c687bca0dd81c6b62d1fdd90d076fa75b428d3fc820cb1e9afdf4155a48bae41060d2d9b41c29ecdf3bdaea0979b92e54b48df5f40fc94195c70bcc79cd79871c48a54f02cd35ad36e962760fc299a4828170832485e9f9135cd86197ec07d2f3dbd2b', // bet
-      rsaN: '5c8b5f36134469c5732159847842bc7a413be914e697fc624bfe9a42f866149d49b318c43ef6eef464926519fa49dbd95b4bc76e8a04d2c782bf7f1efa7d4f3a0c8b38cba23b49ec7de70c0bf1f8bbf14705cd175574bf6512dae5b6eca95c783b6a2544842a1ba7aaa1c6c25cdcaa7173cbf18dead253a0dfe8e569628d0a4f', // channel
-      rsaE: '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003' // channel
-    };
-    window.getRndNumber(rndSig).then(console.log);
-    const ok = window.checkRSASign(info);
-    if (ok) {
-      console.log(`verify pass: ${ok}`);
-    }
+    $(() => {
+      let betInfo;
+      $('#ver-btn').on('click', () => {
+        betInfo = JSON.parse($('#json-input').val());
+        const verifyOK = window.checkRSASign(betInfo);
+        window.alert(verifyOK);
+      });
+      $('#rnd-btn').on('click', () => {
+        window.getRndNumber(betInfo.rndSig).then(n => {
+          window.alert(`${n}: ${n < betInfo.betNumber ? 'win' : 'lose'}`);
+        });
+      });
+    });
     </script>
   </body>
 </html>
