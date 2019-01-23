@@ -8,12 +8,19 @@
     src="https://code.jquery.com/jquery-2.2.4.min.js"
     integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
     crossorigin="anonymous"></script>
+    <style>
+      .cont {
+        display: flex;
+      }
+    </style>
   </head>
   <body>
     <h1>COKEBET Verifier</h1>
-    <textarea id="json-input" >pased json string</textarea>
-    <button id="ver-btn">verify</button>
-    <button id="rnd-btn">get random number</button>
+    <div class="cont">
+      <textarea id="json-input" >pased json string</textarea>
+      <button id="ver-btn">verify</button>
+      <button id="rnd-btn">get random number</button>
+    </div>
     <script>
     $(() => {
       let betInfo;
@@ -23,7 +30,7 @@
         window.alert(verifyOK);
       });
       $('#rnd-btn').on('click', () => {
-        window.getRndNumber(betInfo.rndSig).then(n => {
+        window.getRndNumber('0x' + betInfo.rndSig).then(n => {
           window.alert(`${n}: ${n < betInfo.betNumber ? 'win' : 'lose'}`);
         });
       });
