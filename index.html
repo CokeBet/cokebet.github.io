@@ -67,7 +67,7 @@
       $('#ver-btn').on('click', () => {
         betInfo = JSON.parse($('#json-input').val());
         const verifyOK = window.checkRSASign(betInfo);
-        window.alert(`${verifyOK ? 'Pass' : 'Fail'}`);
+        window.alert(`Bet data signature check: ${verifyOK ? 'Pass' : 'Fail'}`);
         $('#rnd-btn').prop('disabled', false);
       });
 
