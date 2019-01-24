@@ -72,7 +72,7 @@
 
       $('#rnd-btn').on('click', () => {
         window.getRndNumber('0x' + betInfo.rndSig).then(n => {
-          window.alert(`${n}: ${n < betInfo.betNumber ? 'win' : 'lose'}`);
+          window.alert(`Result Number: ${n}`);
         });
       });
     });
