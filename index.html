@@ -46,7 +46,7 @@
       <textarea id="json-input" placeholder="paste the bet string here..."></textarea>
       <div class="btn-cont">
         <button id="ver-btn" class="btn">Verify</button>
-        <button id="rnd-btn" class="btn">Get Random Number</button>
+        <button id="rnd-btn" class="btn" disabled>Get Random Number</button>
         <div><a id="src-btn" class="btn" target="_blank" href="https://github.com/CokeBet/cokebet.github.io">Read Code</a></div>
 
       </div>
@@ -54,11 +54,17 @@
     <script>
     $(() => {
       let betInfo;
+      $('#json-input').on('change', () => {
+        $('#rnd-btn').prop('disabled', true);
+      });
+
       $('#ver-btn').on('click', () => {
         betInfo = JSON.parse($('#json-input').val());
         const verifyOK = window.checkRSASign(betInfo);
-        window.alert(verifyOK);
+        window.alert(`${verifyOK ? 'Pass' : 'Fail'}`);
+        $('#rnd-btn').prop('disabled', false);
       });
+
       $('#rnd-btn').on('click', () => {
         window.getRndNumber('0x' + betInfo.rndSig).then(n => {
           window.alert(`${n}: ${n < betInfo.betNumber ? 'win' : 'lose'}`);
