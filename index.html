@@ -12,6 +12,7 @@
       .cont {
         display: flex;
         flex-direction: column;
+        align-items: center;
       }
       #json-input {
         width: 300px;
@@ -20,20 +21,34 @@
       .btn-cont {
         margin-top: 50px;
         display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .btn {
         height: 50px;
+        width: 50px;
+        border-radius: 10px;
+        margin: 0 20px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      #rnd-btn {
+        width: 150px;
+      }
+      #src-btn {
         width: 100px;
       }
     </style>
   </head>
   <body>
-    <h1>COKEBET Verifier</h1>
     <div class="cont">
-      <textarea id="json-input" >pased json string</textarea>
+      <h1>Cokebet Verifier</h1>
+      <textarea id="json-input" placeholder="paste the bet string here..."></textarea>
       <div class="btn-cont">
-        <button id="ver-btn" class="btn">verify</button>
-        <button id="rnd-btn" class="btn">get random number</button>
+        <button id="ver-btn" class="btn">Verify</button>
+        <button id="rnd-btn" class="btn">Get Random Number</button>
+        <div><a id="src-btn" class="btn" target="_blank" href="https://github.com/CokeBet/cokebet.github.io">Read Code</a></div>
+
       </div>
     </div>
     <script>

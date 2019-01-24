@@ -26188,10 +26188,7 @@ function getBetHash (bet) {
 
 function checkRSASign (bet) {
   const betHash = getBetHash(bet);
-  console.log(`betHash: ${betHash}`);
-  console.log(bet);
-  const ok = verifyRSA(bet.rsaN, bet.rsaE, betHash, bet.rndSig);
-  return ok;
+  return verifyRSA(bet.rsaN, bet.rsaE, betHash, bet.rndSig);
 }
 
 async function getRndNumber (rsaSign) {
