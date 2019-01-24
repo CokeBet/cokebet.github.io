@@ -26137,7 +26137,7 @@ const provider = 'https://ropsten.infura.io/v3/bf28a9be07f4453bb111125224c1c9ba'
 const signidiceAddr = '0xDf43d35f87483a6E482AFaF1184EE369C5646c59';
 const ROLL_MIN = 1;
 const ROLL_MAX = 100;
-const GAMBLE_INTENTION = 2;
+const GAMBLE_INTENTION = 4;
 const web3 = new Web3(provider);
 
 function toBytes2 (number) {
@@ -26149,7 +26149,7 @@ function toBytes32 (number) {
 }
 
 function remove0x (str) {
-  return str.replace(/^/, '');
+  return str.replace(/^0x/, '');
 }
 
 function verifyRSA (rsaN, rsaE, msgHash, msgSign) {
@@ -26173,7 +26173,7 @@ rsaN, // channel
 rsaE // channel
 };
 */
-function checkRSASign (bet) {
+function getBetHash (bet) {
   const betPack = [
     {t: 'uint8', v: GAMBLE_INTENTION},
     {t: 'bytes32', v: bet.channelId},
@@ -26183,7 +26183,15 @@ function checkRSASign (bet) {
     {t: 'bytes32', v: toBytes32(bet.seed)}
   ];
   const betHash = web3.utils.soliditySha3(...betPack);
-  return verifyRSA(bet.rsaN, bet.rsaE, betHash, bet.rndSig);
+  return betHash;
+}
+
+function checkRSASign (bet) {
+  const betHash = getBetHash(bet);
+  console.log(`betHash: ${betHash}`);
+  console.log(bet);
+  const ok = verifyRSA(bet.rsaN, bet.rsaE, betHash, bet.rndSig);
+  return ok;
 }
 
 async function getRndNumber (rsaSign) {
@@ -26193,8 +26201,16 @@ async function getRndNumber (rsaSign) {
   return rndNumber;
 }
 
-window.getRndNumber = getRndNumber;
-window.checkRSASign = checkRSASign;
+module.exports = {
+  getBetHash,
+  checkRSASign,
+  getRndNumber
+};
+
+if (typeof window !== 'undefined') {
+  window.getRndNumber = getRndNumber;
+  window.checkRSASign = checkRSASign;
+}
 
 }).call(this,require("buffer").Buffer)
 },{"../artifacts/Signidice.json":175,"buffer":51,"node-rsa":310,"web3":423}],177:[function(require,module,exports){

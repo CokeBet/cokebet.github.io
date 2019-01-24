@@ -6,11 +6,15 @@
   "author": "codebet <dev@coke.bet>",
   "license": "MIT",
   "private": false,
-  "script": {
+  "scripts": {
+    "test": "tap test/**/*.test.js",
     "build": "browserify lib/core -o build/bundle.js"
   },
   "dependencies": {
     "node-rsa": "^1.0.2",
     "web3": "^1.0.0-beta.37"
+  },
+  "devDependencies": {
+    "tap": "^12.4.0"
   }
 }
