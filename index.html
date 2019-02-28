@@ -17,14 +17,15 @@
         align-items: center;
       }
       #json-input {
-        width: 400px;
-        height: 400px;
+        width: 300px;
+        height: 300px;
       }
       .btn-cont {
         margin-top: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
       }
       .btn {
         height: 30px;
@@ -39,6 +40,9 @@
         color: #aaa;
         cursor: default;
       }
+      #ver-btn {
+        margin-bottom: 20px;
+      }
       #rnd-btn {
         width: 150px;
       }
@@ -49,7 +53,7 @@
   </head>
   <body>
     <div class="cont">
-      <h1>Cokebet Verifier</h1>
+      <h1>COKEBET VERIFIER</h1>
       <textarea id="json-input" placeholder="paste the bet string here..."></textarea>
       <div class="btn-cont">
         <button id="ver-btn" class="btn">Verify & get random number</button>
@@ -59,10 +63,6 @@
     <script>
     $(() => {
       let betInfo;
-      $('#json-input').on('change', () => {
-        $('#rnd-btn').prop('disabled', true);
-      });
-
       $('#ver-btn').on('click', () => {
         betInfo = JSON.parse($('#json-input').val());
         const verifyOK = window.checkRSASign(betInfo);
@@ -73,6 +73,10 @@
         window.getRndNumber('0x' + betInfo.rndSig).then(n => {
           window.alert(`Result Number: ${n}`);
         });
+      });
+
+      $('#json-input').focus(function() {
+        document.execCommand("paste");
       });
     });
     </script>
