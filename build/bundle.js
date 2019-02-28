@@ -83,8 +83,8 @@ function getBetHash (bet) {
     {t: 'bytes32', v: bet.channelId},
     {t: 'uint256', v: web3.utils.toWei(bet.betMoney + '', 'ether')},
     {t: 'uint256', v: bet.session + ''},
-    {t: 'bytes', v: toBytes2(bet.betNumber)},
-    {t: 'bytes32', v: toBytes32(bet.seed)}
+    {t: 'bytes32', v: toBytes32(bet.seed)},
+    {t: 'bytes', v: toBytes2(bet.betNumber)}
   ];
   const betHash = web3.utils.soliditySha3(...betPack);
   return betHash;
